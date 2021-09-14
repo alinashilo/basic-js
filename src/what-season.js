@@ -1,4 +1,3 @@
-import { NotImplementedError } from '../extensions/index.js';
 
 /**
  * Extract season from given date and expose the enemy scout!
@@ -11,7 +10,20 @@ import { NotImplementedError } from '../extensions/index.js';
  * getSeason(new Date(2020, 02, 31)) => 'spring'
  * 
  */
-export default function getSeason(/* date */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function getSeason(date) {
+    if (!date) {
+        return 'Unable to determine the time of year!';
+    }
+
+    if (!(date instanceof Date) || Object.getOwnPropertyNames(date).length) {
+        throw Error('Invalid date!');
+    }
+
+    const month = date.getMonth();
+    const seasons = {
+        0: 'winter', 1: 'winter', 2: 'spring', 3: 'spring', 4: 'spring', 5: 'summer', 6: 'summer', 7: 'summer',
+        8: 'autumn', 9: 'autumn', 10: 'autumn', 11: 'winter'
+    };
+
+    return seasons[month];
 }
